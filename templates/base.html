@@ -19,9 +19,6 @@
     <div class="container mt-3">
         <ul class="nav nav-tabs mb-4">
             {% set active_category = category_name if category_name is defined else None %}
-            {% if request.endpoint == 'home' %}
-                {% set active_category = 'general' %}
-            {% endif %}
             {% for value, label in nav_categories %}
                 <li class="nav-item">
                     <a class="nav-link {% if active_category == value %}active{% endif %}" href="{{ url_for('category_page', category_name=value) }}">{{ label }}</a>
