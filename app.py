@@ -77,7 +77,7 @@ def submit():
 #     return render_template('videos.html', form=form, embed_url=embed_url, active_tab='video')
 @app.route('/video-advice', methods=['GET', 'POST'])
 def video_advice():
-    form = YourForm()
+    form = VideoForm()
     embed_url = None
     original_url = None
 
@@ -85,7 +85,7 @@ def video_advice():
         original_url = form.youtube_url.data
         embed_url = convert_to_embed(original_url)
 
-    return render_template('video_advice.html',
+    return render_template('videos.html',
                            form=form,
                            embed_url=embed_url,
                            original_url=original_url)
