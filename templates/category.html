@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} Posts - CS Forum{% endblock %}
+
+{% block content %}
+    <h1>{{ title }} Posts</h1>
+    <p>Showing anonymous stories and advice for {{ title }}.</p>
+    {% if posts %}
+        {% for post in posts %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h5>
+                    <p class="card-text">{{ post.content[:200] }}...</p>
+                    <p class="card-text"><small class="text-muted">{{ post.post_type }} | {{ post.category }} | {{ post.date_posted.strftime('%Y-%m-%d') }}</small></p>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-info">There are no posts yet for {{ title }}.</div>
+    {% endif %}
+{% endblock %}

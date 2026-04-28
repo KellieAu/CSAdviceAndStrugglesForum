@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CS Advice & Struggles Forum{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('home') }}">CS Forum</a>
+            <div class="navbar-nav">
+                <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                <a class="nav-link" href="{{ url_for('submit') }}">Submit</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-3">
+        <ul class="nav nav-tabs mb-4">
+            {% set active_category = category_name if category_name is defined else None %}
+            {% if request.endpoint == 'home' %}
+                {% set active_category = 'general' %}
+            {% endif %}
+            {% for value, label in nav_categories %}
+                <li class="nav-item">
+                    <a class="nav-link {% if active_category == value %}active{% endif %}" href="{{ url_for('category_page', category_name=value) }}">{{ label }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
