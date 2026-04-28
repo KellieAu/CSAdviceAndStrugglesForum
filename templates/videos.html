@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block title %}Video Advice from Alumni - CS Forum{% endblock %}
+
+{% block content %}
+    <h1>Video Advice from Alumni</h1>
+    <p>Watch advice from alumni below.</p>
+
+    <h2>Advice from the Class of 2026</h2>
+    <div style="max-width: 900px; margin: 0 auto;">
+        <!-- Thumbnail preview that loads iframe on click -->
+        <div id="video-container" style="position: relative; cursor: pointer;"
+             onclick="loadVideo()">
+
+            <img
+                id="thumbnail"
+                src="https://img.youtube.com/vi/44GqxDb5mds/maxresdefault.jpg"
+                alt="Video thumbnail"
+                style="width: 100%; border-radius: 12px;
+                       box-shadow: 0 8px 32px rgba(0,0,0,0.2); display: block;">
+
+            <!-- Play button overlay -->
+            <div style="position: absolute; top: 50%; left: 50%;
+                        transform: translate(-50%, -50%);
+                        width: 72px; height: 72px; background: rgba(255,0,0,0.85);
+                        border-radius: 50%; display: flex;
+                        align-items: center; justify-content: center;
+                        box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
+                <div style="width: 0; height: 0;
+                            border-top: 14px solid transparent;
+                            border-bottom: 14px solid transparent;
+                            border-left: 24px solid white;
+                            margin-left: 5px;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Hidden iframe, shown on click -->
+        <div id="iframe-container"
+             class="ratio ratio-16x9"
+             style="display: none; margin-top: 0;">
+            <iframe
+                id="yt-iframe"
+                src=""
+                title="YouTube video"
+                allow="accelerometer; autoplay; clipboard-write;
+                       encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                style="border: none; border-radius: 12px;
+                       box-shadow: 0 8px 32px rgba(0,0,0,0.2);">
+            </iframe>
+        </div>
+
+        <p class="text-center mt-2" style="color: #aaa; font-size: 14px;">
+            Having trouble?
+            <a href="https://www.youtube.com/watch?v=44GqxDb5mds"
+               target="_blank" rel="noopener noreferrer">
+                Watch directly on YouTube
+            </a>
+        </p>
+    </div>
+
+    <script>
+        function loadVideo() {
+            document.getElementById('video-container').style.display = 'none';
+            const iframe = document.getElementById('yt-iframe');
+            iframe.src = 'https://www.youtube.com/embed/nCvmgHYV5Us?autoplay=1&rel=0';
+            document.getElementById('iframe-container').style.display = 'block';
+        }
+    </script>
+
+
+    <h2>Advice from the Class of 2025</h2>
+    <div style="max-width: 900px; margin: 0 auto;">
+        <!-- Thumbnail preview that loads iframe on click -->
+        <div id="video-container" style="position: relative; cursor: pointer;"
+             onclick="loadVideo()">
+
+            <img
+                id="thumbnail"
+                src="https://img.youtube.com/vi/3KqVz36f4sU/maxresdefault.jpg"
+                alt="Video thumbnail"
+                style="width: 100%; border-radius: 12px;
+                       box-shadow: 0 8px 32px rgba(0,0,0,0.2); display: block;">
+
+            <!-- Play button overlay -->
+            <div style="position: absolute; top: 50%; left: 50%;
+                        transform: translate(-50%, -50%);
+                        width: 72px; height: 72px; background: rgba(255,0,0,0.85);
+                        border-radius: 50%; display: flex;
+                        align-items: center; justify-content: center;
+                        box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
+                <div style="width: 0; height: 0;
+                            border-top: 14px solid transparent;
+                            border-bottom: 14px solid transparent;
+                            border-left: 24px solid white;
+                            margin-left: 5px;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Hidden iframe, shown on click -->
+        <div id="iframe-container"
+             class="ratio ratio-16x9"
+             style="display: none; margin-top: 0;">
+            <iframe
+                id="yt-iframe"
+                src=""
+                title="YouTube video"
+                allow="accelerometer; autoplay; clipboard-write;
+                       encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                style="border: none; border-radius: 12px;
+                       box-shadow: 0 8px 32px rgba(0,0,0,0.2);">
+            </iframe>
+        </div>
+
+        <p class="text-center mt-2" style="color: #aaa; font-size: 14px;">
+            Having trouble?
+            <a href="https://www.youtube.com/watch?v=3KqVz36f4sU"
+               target="_blank" rel="noopener noreferrer">
+                Watch directly on YouTube
+            </a>
+        </p>
+    </div>
+
+    <script>
+        function loadVideo() {
+            document.getElementById('video-container').style.display = 'none';
+            const iframe = document.getElementById('yt-iframe');
+            iframe.src = 'https://www.youtube.com/embed/3KqVz36f4sU?autoplay=1&rel=0';
+            document.getElementById('iframe-container').style.display = 'block';
+        }
+    </script>
+{% endblock %}

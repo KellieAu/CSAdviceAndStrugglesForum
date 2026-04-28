@@ -18,10 +18,10 @@
     </nav>
     <div class="container mt-3">
         <ul class="nav nav-tabs mb-4">
-            {% set active_category = category_name if category_name is defined else None %}
-            {% for value, label in nav_categories %}
+            {% set active_tab = active_tab if active_tab is defined else (category_name if category_name is defined else None) %}
+            {% for value, label in nav_tabs %}
                 <li class="nav-item">
-                    <a class="nav-link {% if active_category == value %}active{% endif %}" href="{{ url_for('category_page', category_name=value) }}">{{ label }}</a>
+                    <a class="nav-link {% if active_tab == value %}active{% endif %}" href="{% if value == 'video' %}{{ url_for('video_advice') }}{% else %}{{ url_for('category_page', category_name=value) }}{% endif %}">{{ label }}</a>
                 </li>
             {% endfor %}
         </ul>
