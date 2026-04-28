@@ -49,6 +49,65 @@ def submit():
         return redirect(url_for('home'))
     return render_template('submit.html', form=form)
 
+# def get_youtube_embed_url(url):
+#     patterns = [
+#         r'(?:https?://)?(?:www\.)?youtube\.com/watch\?v=([^&]+)',
+#         r'(?:https?://)?(?:www\.)?youtu\.be/([^?&]+)',
+#         r'(?:https?://)?(?:www\.)?youtube\.com/embed/([^?&]+)',
+#     ]
+#     for pattern in patterns:
+#         match = re.search(pattern, url)
+#         if match:
+#             return f'https://www.youtube.com/embed/{match.group(1)}'
+#     return None
+
+# @app.route('/video', methods=['GET', 'POST'])
+# def video_advice():
+#     form = VideoForm()
+#     embed_url = None
+#     if form.validate_on_submit():
+#         embed_url = get_youtube_embed_url(form.youtube_url.data.strip())
+#         if not embed_url:
+#             flash('Enter a valid YouTube video URL.', 'danger')
+#     return render_template('videos.html', form=form, embed_url=embed_url, active_tab='video')
+@app.route('/video-advice', methods=['GET', 'POST'])
+def video_advice():
+    form = VideoForm()
+    embed_url = None
+    original_url = None
+
+    if form.validate_on_submit():
+        original_url = form.youtube_url.data
+        embed_url = convert_to_embed(original_url)
+
+    return render_template('videos.html',
+                           form=form,
+                           embed_url=embed_url,
+                           original_url=original_url)
+
+
+def convert_to_embed(url):
+    """Convert any YouTube URL format to an embed URL."""
+    try:
+        parsed = urlparse(url)
+
+        # Standard: https://www.youtube.com/watch?v=VIDEO_ID
+        if 'youtube.com' in parsed.netloc:
+            params = parse_qs(parsed.query)
+            if 'v' in params:
+                video_id = params['v'][0]
+                return f"https://www.youtube.com/embed/{video_id}?rel=0"
+
+        # Short: https://youtu.be/VIDEO_ID
+        elif 'youtu.be' in parsed.netloc:
+            video_id = parsed.path.lstrip('/')
+            return f"https://www.youtube.com/embed/{video_id}?rel=0"
+
+        return None  # unrecognized format
+
+    except Exception:
+        return None
+
 @app.route('/category/<category_name>')
 def category_page(category_name):
     if category_name not in CATEGORIES:
