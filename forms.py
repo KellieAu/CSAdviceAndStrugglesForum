@@ -21,7 +21,3 @@ class PostForm(FlaskForm):
         validators=[DataRequired()],
     )
     submit = SubmitField('Submit')
-
-class VideoForm(FlaskForm):
-    youtube_url = StringField('YouTube Link', validators=[DataRequired(), Length(min=1, max=255)])
-    submit = SubmitField('Preview')

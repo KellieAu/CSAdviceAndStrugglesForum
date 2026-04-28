@@ -75,20 +75,9 @@ def submit():
 #         if not embed_url:
 #             flash('Enter a valid YouTube video URL.', 'danger')
 #     return render_template('videos.html', form=form, embed_url=embed_url, active_tab='video')
-@app.route('/video-advice', methods=['GET', 'POST'])
+@app.route('/video-advice')
 def video_advice():
-    form = YourForm()
-    embed_url = None
-    original_url = None
-
-    if form.validate_on_submit():
-        original_url = form.youtube_url.data
-        embed_url = convert_to_embed(original_url)
-
-    return render_template('video_advice.html',
-                           form=form,
-                           embed_url=embed_url,
-                           original_url=original_url)
+    return render_template('videos.html', active_tab='video')
 
 
 def convert_to_embed(url):
